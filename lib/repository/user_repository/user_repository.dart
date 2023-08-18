@@ -17,12 +17,7 @@ class UserRepository extends GetxController{
                   colorText: Colors.green),
 
 
-      ).catchError((Error stackTrace){
-        Get.snackbar('Success', 'Your account has been Created',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor:Colors.green.withOpacity(0.1),
-            colorText: Colors.green),
-      });
+      ));
   }
 
 
