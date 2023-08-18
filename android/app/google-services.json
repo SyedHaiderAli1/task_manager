@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "614715495051",
+    "project_id": "verticalsols-tasks",
+    "storage_bucket": "verticalsols-tasks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614715495051:android:734a7128d2268ccf73fa8e",
+        "android_client_info": {
+          "package_name": "com.example.task_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614715495051-84efbh2r5cf2311te49hmrko3acdg8tg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.task_manager",
+            "certificate_hash": "f38876c0e78e3cf4735236e7a897bb15c36ff432"
+          }
+        },
+        {
+          "client_id": "614715495051-ptlfcft9a5qa3kgucbjmic2ldbbjrf8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD09eoHs8dc1n6VWge5VTavfm3TntWBdGk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614715495051-ptlfcft9a5qa3kgucbjmic2ldbbjrf8l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "614715495051-m32m5kgit2hsq0rbth6jss9egkm8ms0g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.taskManager"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
