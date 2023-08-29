@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:task_manager/Models/user_model.dart';
 import 'package:task_manager/app/modules/login/views/login_view.dart';
 import 'package:task_manager/app/modules/otp/views/otp_view.dart';
 
@@ -24,36 +25,36 @@ class _SignupViewState extends State<SignupView> {
 
     final controller=Get.put(SignupController());
 
-    String fullnameError = '';
-    String phoneNoError = '';
-    String emailError = '';
-    String passwordError = '';
 
-    void validateFields() {
-      if (controller.fullname.text.trim().isEmpty) {
-        Get.snackbar('Error', 'Full name is required');
-        return;
-      }
-
-      if (controller.PhoneNo.text.trim().isEmpty) {
-        Get.snackbar('Error', 'Phone number is required');
-        return;
-      }
-
-      if (controller.email.text.trim().isEmpty) {
-        Get.snackbar('Error', 'Email is required');
-        return;
-      } else if (!GetUtils.isEmail(controller.email.text.trim())) {
-        Get.snackbar('Error', 'Please enter a valid email');
-        return;
-      }
-
-      if (controller.password.text.trim().isEmpty) {
-        Get.snackbar('Error', 'Password is required');
-        return;
-      }
+    bool isFieldEmpty(String value) {
+      return value.trim().isEmpty;
     }
 
+    void performActionIfFieldsNotEmpty() {
+      if (isFieldEmpty(controller.fullname.text)) {
+        // Show an error message or perform an action for empty fullname field
+        Get.snackbar('Error', 'Fullname is required',colorText: Colors.red);
+      } else if (isFieldEmpty(controller.PhoneNo.text)) {
+        // Show an error message or perform an action for empty PhoneNo field
+        Get.snackbar('Error', 'Phone No is required',colorText: Colors.red);
+      } else if (isFieldEmpty(controller.email.text)) {
+        // Show an error message or perform an action for empty email field
+        Get.snackbar('Error', 'Email is required',colorText: Colors.red);
+      } else if (isFieldEmpty(controller.password.text)) {
+        // Show an error message or perform an action for empty password field
+        Get.snackbar('Error', 'Password is required',colorText: Colors.red);
+      } else {
+        // All fields are not empty, perform your action here
+        final user = UserModel(
+          email: controller.email.text.trim(),
+          fullName: controller.fullname.text.trim(),
+          password: controller.password.text.trim(),
+          phoneNo: controller.PhoneNo.text.trim(),
+        );
+        SignupController.instance.createUser(user);
+        Get.to(() => OtpView());
+      }
+    }
 
 
 
@@ -116,7 +117,7 @@ class _SignupViewState extends State<SignupView> {
                   keyboardType: TextInputType.phone,
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    labelText: 'Phone Number',
+                    labelText: 'Phone Number With Country Code',
                     labelStyle: TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -224,23 +225,16 @@ class _SignupViewState extends State<SignupView> {
                 ),
                 SizedBox(height: 20.0),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: performActionIfFieldsNotEmpty,
 
-
-
-                    if (fullnameError.isEmpty && phoneNoError.isEmpty && emailError.isEmpty && passwordError.isEmpty) {
-                      validateFields();
-                    }else{
-                      SignupController.instance.regiestredUser(controller.fullname.text.trim(),controller.email.text.trim(), controller.password.text.trim());
-                      Get.to(() => OtpView());
-                    }
-
-
+                    //for Email & pass Authentication
                     // SignupController.instance.regiestredUser
                     //   (controller.fullname.text.trim(),controller.email.text.trim(), controller.password.text.trim());
+
+                    //for phone Authentication
                     // SignupController.instance.phoneAuthentication(controller.PhoneNo.text.trim());
                     // Get.to(()=>OtpView());
-                  },
+
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(44,40),
                     shape: RoundedRectangleBorder(
@@ -252,21 +246,20 @@ class _SignupViewState extends State<SignupView> {
                 SizedBox(height: 20.0),
                 Text('Already have an account?',textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white),),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const LoginView()),
-                    );
+
+                ElevatedButton(
+                  onPressed: (){
+                    Get.to(LoginView());
                   },
-                  child: Text(
-                    'Sign in',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                    color: Colors.white,fontSize:16,fontWeight:
-                    FontWeight.bold
+
+
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(44,40),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
+                  child: Text('Sign in'),
                 ),
               ],
             ),

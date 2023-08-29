@@ -9,15 +9,19 @@ class UserRepository extends GetxController{
 
   final _db= FirebaseFirestore.instance;
 
-  createUser(UserModel user){
-      _db.collection("Users").add(user.toJson()).whenComplete(
+  createUser(UserModel user) async {
+      await _db.collection("Users").add(user.toJson()).whenComplete(
               () => Get.snackbar('Success', 'Your account has been Created',
                   snackPosition: SnackPosition.BOTTOM,
                   backgroundColor:Colors.green.withOpacity(0.1),
                   colorText: Colors.green),
-
-
-      ));
+      ).catchError((error, stackTrace) {
+        Get.snackbar('Error', 'Something went Wrong. Try Again',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor:Colors.red.withOpacity(0.1),
+            colorText: Colors.red);
+        print(error.toString());
+      });
   }
 
 

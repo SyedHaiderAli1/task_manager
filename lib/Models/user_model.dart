@@ -1,5 +1,4 @@
 
-import 'dart:js_interop';
 
 class UserModel{
   final String? id;
@@ -25,6 +24,8 @@ class UserModel{
         "Password":password,
     };
   }
+
+  //
 
 
 

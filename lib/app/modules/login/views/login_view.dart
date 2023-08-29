@@ -149,16 +149,28 @@ class _LoginViewState extends State<LoginView> {
                 Text('Already have an account?',textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white),),
                 SizedBox(height: 10.0,),
-                GestureDetector(
-                  onTap: () {
+
+
+                ElevatedButton(
+                  onPressed: (){
                     Get.to(SignupView());
                   },
-                  child: Text(
-                    'Sign up',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18,
+
+                  //for Email & pass Authentication
+                  // SignupController.instance.regiestredUser
+                  //   (controller.fullname.text.trim(),controller.email.text.trim(), controller.password.text.trim());
+
+                  //for phone Authentication
+                  // SignupController.instance.phoneAuthentication(controller.PhoneNo.text.trim());
+                  // Get.to(()=>OtpView());
+
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(44,40),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
+                  child: Text('Sign up'),
                 ),
 
               ],
