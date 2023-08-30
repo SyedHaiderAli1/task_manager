@@ -27,6 +27,4 @@ class UserModel{
 
   //
 
-
-
 }
